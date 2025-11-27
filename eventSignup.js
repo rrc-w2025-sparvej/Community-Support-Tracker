@@ -1,15 +1,7 @@
 
 let tempSignup = null;
 
-/**
- * Validate signup data.
- * @param {Object} data
- * @param {string} data.eventName
- * @param {string} data.repName
- * @param {string} data.repEmail
- * @param {string} data.eventRole
- * @returns {string[]} 
- */
+// Validate the signup data
 function validateSignup(data) {
     const errors = [];
 
@@ -37,11 +29,7 @@ function validateSignup(data) {
     return errors;
 }
 
-/**
- * Process raw form data into a cleaned signup object.
- * @param {Object} data
- * @returns {Object} 
- */
+// Process and clean the signup data
 function processSignup(data) {
     return {
         eventName: data.eventName.trim(),
@@ -51,26 +39,17 @@ function processSignup(data) {
     };
 }
 
-/**
- * Setter for tempSignup (used in DOM + tests).
- * @param {Object} signup
- */
+// Temporary storage for signup data
 function setTempSignup(signup) {
     tempSignup = signup;
 }
 
-/**
- * Getter for tempSignup (used in tests).
- * @returns {Object|null}
- */
+// Retrieve temporary signup data
 function getTempSignup() {
     return tempSignup;
 }
 
-/**
- * Handle form submission from the DOM.
- * @param {SubmitEvent} event
- */
+// Handle form submission
 function handleEventSignupSubmit(event) {
     event.preventDefault();
 
@@ -102,7 +81,7 @@ function handleEventSignupSubmit(event) {
         return;
     }
 
-    // No errors → process data and store in temporary object
+    // No errors →process data and store in temporary object
     const cleaned = processSignup(formData);
     setTempSignup(cleaned);
 
@@ -132,7 +111,7 @@ if (typeof window !== "undefined") {
 }
 
 /**
- * Export for Jest tests (Node.js / CommonJS environment).
+ * Export for Jest tests.
  */
 if (typeof module !== "undefined" && module.exports) {
     module.exports = {
