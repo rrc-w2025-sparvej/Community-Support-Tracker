@@ -7,11 +7,9 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-
+    
     <!-- Shared Styles -->
     <link rel="stylesheet" href="template.css" />
-    <!-- Event Signup Styles -->
-    <link rel="stylesheet" href="eventSignup.css" />
 </head>
 
 <body>
@@ -38,28 +36,32 @@
             <!-- EVENT SIGNUP FORM -->
             <form id="eventSignupForm" class="form-container">
 
-                <!-- Event Name -->
-                <label for="eventName">Event Name</label>
-                <input type="text" id="eventName" name="eventName" placeholder="Enter event name" />
+                <div class="form-group">
+                    <label for="eventName">Event Name</label>
+                    <input type="text" id="eventName" name="eventName" placeholder="Enter event name" />
+                </div>
 
-                <!-- Representative Name -->
-                <label for="repName">Company Representative's Name</label>
-                <input type="text" id="repName" name="repName" placeholder="Enter representative name" />
+                <div class="form-group">
+                    <label for="repName">Company Representative's Name</label>
+                    <input type="text" id="repName" name="repName" placeholder="Enter representative name" />
+                </div>
 
-                <!-- Representative Email -->
-                <label for="repEmail">Representative's Email</label>
-                <input type="email" id="repEmail" name="repEmail" placeholder="Enter representative email" />
+                <div class="form-group">
+                    <label for="repEmail">Representative's Email</label>
+                    <input type="email" id="repEmail" name="repEmail" placeholder="Enter representative email" />
+                </div>
 
-                <!-- Role Selection -->
-                <label for="eventRole">Select Role</label>
-                <select id="eventRole" name="eventRole">
-                    <option value="">Choose a role</option>
-                    <option value="Sponsor">Sponsor</option>
-                    <option value="Participant">Participant</option>
-                    <option value="Organizer">Organizer</option>
-                </select>
+                <div class="form-group">
+                    <label for="eventRole">Role</label>
+                    <select id="eventRole" name="eventRole">
+                        <option value="">Select a role</option>
+                        <option value="Sponsor">Sponsor</option>
+                        <option value="Participant">Participant</option>
+                        <option value="Organizer">Organizer</option>
+                    </select>
+                </div>
 
-                <!-- Error Message Area -->
+                <!-- Error Message -->
                 <div id="formErrors" class="error-message"></div>
 
                 <!-- Submit Button -->
@@ -74,7 +76,8 @@
         <p>2025 PiXELL River Financial — Community Support Tracker</p>
     </footer>
 
-    <!-- Event Signup JS -->
     <script src="eventSignup.js"></script>
 </body>
 </html>
+
+
