@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Hours Tracker</title>
+</head>
+<body>
+<header>
+  <h1>Volunteer Hours Tracker</h1>
+  <p>Community Support Tracker - PiXELL River Financial</p>
+
+  <nav>
+    <a href="volunteer.html">Volunteer Tracker</a> |
+  </nav>
+</header>
+  <main>
+    <section id="volunteer-info">
+      <h2>Log Volunteer Hours</h2>
+      <p>Use the form below to record your volunteer activity.</p>
+    </section>
+    <section id="volunteer-form-section" aria-labelledby="form-heading">
+      <h2 id="form-heading">Volunteer Hours Form</h2>
+
+      <form id="volunteerForm">
+        <label for="charityName">Charity Name:</label>
+        <input type="text" id="charityName" name="charityName" required>
+
+        <label for="hoursVolunteered">Hours Volunteered:</label>
+        <input type="number" id="hoursVolunteered" name="hoursVolunteered" required>
+
+        <label for="volunteerDate">Date:</label>
+        <input type="date" id="volunteerDate" name="volunteerDate" required>
+
+        <label for="experienceRating">Experience Rating (1-5):</label>
+        <input type="number" id="experienceRating" name="experienceRating" min="1" max="5" required>
+
+        <button type="submit">Submit Volunteer Log</button>
+      </form>
+
+      <p id="errorMessage" aria-live="polite"></p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>PiXELL River Financial - Community Support Tracker</p>
+  </footer>
+  <script src="volunteer.js"></script>
+
+</body>
+</html>
