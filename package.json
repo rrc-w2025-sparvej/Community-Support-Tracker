@@ -1,0 +1,24 @@
+{
+  "name": "community-support-tracker",
+  "version": "1.0.0",
+  "description": "PiXELL River Financial prides itself on being a good citizen. As part of our commitment to the communities in which we live and work, we are developing a Community Support Tracker. This tool will help us monitor and manage our various community support initiatives, ensuring we're making a meaningful impact.",
+  "main": "volunteer.js",
+  "scripts": {
+    "test": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rrc-w2025-sparvej/Community-Support-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rrc-w2025-sparvej/Community-Support-Tracker/issues"
+  },
+  "homepage": "https://github.com/rrc-w2025-sparvej/Community-Support-Tracker#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
