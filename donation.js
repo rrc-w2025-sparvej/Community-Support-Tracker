@@ -1,7 +1,5 @@
 let tempDonation = null;
 
-
-
 function validateDonation(charity, amount, date) {
     if (!charity || !amount || !date) {
         return { valid: false, message: "All fields are required." };
