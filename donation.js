@@ -21,6 +21,15 @@ function buildDonationObject(charity, amount, date, message) {
     };
 }
 
+// local storage helpers
+function loadDonations() {
+    return JSON.parse(localStorage.getItem("donations")) || [];
+}
+
+function saveDonations(donations) {
+    localStorage.setItem("donations", JSON.stringify(donations));
+}
+
 function onSubmit(event) {
     event.preventDefault();
 
@@ -40,6 +49,11 @@ function onSubmit(event) {
     document.getElementById("errorMessage").innerText = "";
 
     tempDonation = buildDonationObject(charity, amount, date, message);
+    const donations = loadDonations();
+    donations.push(tempDonation);
+    saveDonations(donations);
+
+    
     console.log("Donation submitted:", tempDonation);
 } 
 
@@ -48,7 +62,9 @@ function onPageLoad() {
     if (form) {
         form.addEventListener("submit", onSubmit);
     }
+    console.log("Loaded saved donations:", loadDonations());
 }
+
 
 
 onPageLoad();
