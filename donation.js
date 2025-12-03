@@ -34,6 +34,8 @@ function renderDonationTable() {
     const donations = loadDonations();
     const tableBody = document.querySelector("#donationTable tbody");
 
+    if (!tableBody) return;
+
     tableBody.innerHTML = ""; 
 
     donations.forEach((donation, index) => {
@@ -79,7 +81,7 @@ function updateTotalDonations() {
         return sum + Number(donation.amount);
     }, 0);
 
-    document.getElementById("totalDonations").innerText = total;
+    document.getElementById("totalDonations").innerText = total.toString();
 }
 
 function onSubmit(event) {
@@ -117,19 +119,24 @@ function onPageLoad() {
     }
     // Render table when the page loads
     renderDonationTable();
-
-    console.log("Loaded saved donations:", loadDonations());
+}
+    if (typeof window !== "undefined" && typeof document !== "undefined") {
+    onPageLoad();
 }
 
+    
 
-
-onPageLoad();
 
 if (typeof module !== "undefined") {
     module.exports = {
         validateDonation,
         buildDonationObject,
         onSubmit,
-        getTempDonation: () => tempDonation
+        getTempDonation: () => tempDonation,
+        loadDonations,
+        saveDonations,
+        renderDonationTable,
+        updateTotalDonations,
+        deleteDonation
     };
 }
