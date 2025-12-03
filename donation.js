@@ -30,6 +30,31 @@ function saveDonations(donations) {
     localStorage.setItem("donations", JSON.stringify(donations));
 }
 
+function renderDonationTable() {
+    const donations = loadDonations();
+    const tableBody = document.querySelector("#donationTable tbody");
+
+    tableBody.innerHTML = ""; 
+
+    donations.forEach((donation, index) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${donation.charity}</td>
+            <td>${donation.amount}</td>
+            <td>${donation.date}</td>
+            <td>${donation.message}</td>
+            <td>
+                <button class="delete-btn" data-index="${index}">
+                    Delete
+                </button>
+            </td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+}
+
 function onSubmit(event) {
     event.preventDefault();
 
@@ -52,6 +77,7 @@ function onSubmit(event) {
     const donations = loadDonations();
     donations.push(tempDonation);
     saveDonations(donations);
+    renderDonationTable();
 
     
     console.log("Donation submitted:", tempDonation);
@@ -62,6 +88,9 @@ function onPageLoad() {
     if (form) {
         form.addEventListener("submit", onSubmit);
     }
+    // Render table when the page loads
+    renderDonationTable();
+
     console.log("Loaded saved donations:", loadDonations());
 }
 
