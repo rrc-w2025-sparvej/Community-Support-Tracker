@@ -53,6 +53,33 @@ function renderDonationTable() {
 
         tableBody.appendChild(row);
     });
+
+    // Add delete button click listeners
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const index = btn.getAttribute("data-index");
+            deleteDonation(index);
+        });
+    });
+    updateTotalDonations();
+
+}
+
+function deleteDonation(index) {
+    const donations = loadDonations();   // get existing
+    donations.splice(index, 1);           // remove one item
+    saveDonations(donations);              // save updated list
+    renderDonationTable();                // refresh table
+}
+
+function updateTotalDonations() {
+    const donations = loadDonations();
+
+    const total = donations.reduce((sum, donation) => {
+        return sum + Number(donation.amount);
+    }, 0);
+
+    document.getElementById("totalDonations").innerText = total;
 }
 
 function onSubmit(event) {
