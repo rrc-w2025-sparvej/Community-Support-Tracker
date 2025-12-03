@@ -94,3 +94,46 @@ body {
         margin-top: 20px;
     }
 }
+
+.card form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card label {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+}
+
+.card input,
+.card textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #D4D4D4;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+}
+
+.card button {
+    background-color: #8ED1B2;
+    border: none;
+    padding: 12px 18px;
+    color: white;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.card button:hover {
+    background-color: #7bc6a2;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: -8px;
+}
