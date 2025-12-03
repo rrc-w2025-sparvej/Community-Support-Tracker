@@ -1,7 +1,5 @@
 // Unit tests and integration tests for donations.js
 
-
-
 const {
     validateDonation,
     buildDonationObject,
@@ -93,11 +91,13 @@ describe("Integration Tests", () => {
     });
 });
 
+//Stage 2 Unit Tests and Integration Tests
 describe("Stage 2 Unit Tests", () => {
     beforeEach(() => {
         localStorage.clear();
     });
 
+    // test 1: total donation calculation
     test("calculate total donation amount correctly", () => {
         saveDonations([
             { charity: "A", amount: 10, date: "2025-01-01", message: "" },
@@ -113,6 +113,7 @@ describe("Stage 2 Unit Tests", () => {
         expect(document.getElementById("totalDonations").innerText).toBe("30");
     });
 
+    // test 2: deleting a record updates localStorage
     test("deleting a record updates localStorage", () => {
         saveDonations([
             { charity: "A", amount: 10, date: "2025-01-01", message: "" },
@@ -126,6 +127,7 @@ describe("Stage 2 Unit Tests", () => {
     });
 });
 
+// Stage 2 Integration Tests
 describe("Stage 2 Integration Tests", () => {
     beforeEach(() => {
         localStorage.clear();
@@ -138,6 +140,7 @@ describe("Stage 2 Integration Tests", () => {
         `;
     });
 
+    // test 1: table updates after saving data
     test("table updates after saving data", () => {
         saveDonations([
             { charity: "Test", amount: 50, date: "2025-01-10", message: "Hi" }
@@ -150,6 +153,7 @@ describe("Stage 2 Integration Tests", () => {
         expect(rows[0].children[0].innerHTML).toBe("Test");
     });
 
+    // test 2: table loads persisted data correctly
     test("table loads persisted data correctly", () => {
         saveDonations([
             { charity: "A", amount: 10, date: "2025-01-01", message: "x" },
