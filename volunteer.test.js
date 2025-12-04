@@ -2,7 +2,8 @@ const {
     validateCharity,
     validateHours,
     validateDate,
-    validateRating
+    validateRating,
+    onSubmit
 } = require("./volunteer.js");
 
 describe("Unit Tests", () => {
@@ -36,15 +37,23 @@ describe("Unit Tests", () => {
 describe("Integration Tests", () => {
 
     beforeEach(() => {
+        localStorage.clear();
+
         document.body.innerHTML = `
             <form id="volunteerForm">
                 <input id="charityName" />
                 <input id="hoursVolunteered" />
                 <input id="volunteerDate" />
                 <input id="experienceRating" />
-                <p id="errorMessage"></p>
             </form>
+
+            <table>
+                <tbody id="volunteerTableBody"></tbody>
+            </table>
+
+            <p id="totalHours"></p>
         `;
+        document.dispatchEvent(new Event("DOMContentLoaded"));
     });
 
     test("form shows no errors when valid input is submitted", () => {
@@ -54,8 +63,7 @@ describe("Integration Tests", () => {
         document.getElementById("experienceRating").value = "4";
 
         const event = { preventDefault: () => {} };
-
-        require("./volunteer.js").onSubmit(event);
+        onSubmit(event);
 
         const errors = document.querySelectorAll(".error-message");
         expect(errors.length).toBe(0);
@@ -68,11 +76,59 @@ describe("Integration Tests", () => {
         document.getElementById("experienceRating").value = "";
 
         const event = { preventDefault: () => {} };
-
-        require("./volunteer.js").onSubmit(event);
+        onSubmit(event);
 
         const errors = document.querySelectorAll(".error-message");
         expect(errors.length).toBeGreaterThan(0);
+    });
+
+    test("table updates after valid submit", () => {
+        const event = { preventDefault: () => {} };
+
+        document.getElementById("charityName").value = "ABC";
+        document.getElementById("hoursVolunteered").value = "5";
+        document.getElementById("volunteerDate").value = "2025-01-01";
+        document.getElementById("experienceRating").value = "4";
+
+        onSubmit(event);
+
+        const rows = document.querySelectorAll("#volunteerTableBody tr");
+        expect(rows.length).toBe(1);
+    });
+
+    test("deleting a record removes it from table and localStorage", () => {
+        const event = { preventDefault: () => {} };
+
+        document.getElementById("charityName").value = "ABC";
+        document.getElementById("hoursVolunteered").value = "5";
+        document.getElementById("volunteerDate").value = "2025-01-01";
+        document.getElementById("experienceRating").value = "4";
+
+        onSubmit(event);
+        const deleteBtn = document.querySelector("button");
+        deleteBtn.click();
+
+        const rows = document.querySelectorAll("#volunteerTableBody tr");
+        expect(rows.length).toBe(0);
+
+        const stored = JSON.parse(localStorage.getItem("volunteerLogs"));
+        expect(stored.length).toBe(0);
+    });
+
+    test("summary updates after deletion", () => {
+        const event = { preventDefault: () => {} };
+
+        document.getElementById("charityName").value = "ABC";
+        document.getElementById("hoursVolunteered").value = "4";
+        document.getElementById("volunteerDate").value = "2025-01-01";
+        document.getElementById("experienceRating").value = "3";
+
+        onSubmit(event);
+        const deleteBtn = document.querySelector("button");
+        deleteBtn.click();
+
+        const summaryText = document.getElementById("totalHours").textContent;
+        expect(Number(summaryText)).toBe(0);
     });
 
 });
