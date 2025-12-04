@@ -23,7 +23,12 @@ function buildDonationObject(charity, amount, date, message) {
 
 // local storage helpers
 function loadDonations() {
-    return JSON.parse(localStorage.getItem("donations")) || [];
+    try {
+        return JSON.parse(localStorage.getItem("donations")) || [];
+    } catch {
+        console.error("Corrupted localStorage data detected. Resetting.");
+        return [];
+    }
 }
 
 function saveDonations(donations) {
