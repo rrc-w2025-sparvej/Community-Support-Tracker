@@ -132,6 +132,17 @@ function onSubmit(event) {
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("volunteerForm");
     form.addEventListener("submit", onSubmit);
+
+    document.addEventListener("click", function(event) {
+        if (event.target.tagName === "BUTTON" && event.target.textContent === "Delete") {
+            const index = event.target.dataset.index;
+            const logs = getVolunteerLogs();
+            logs.splice(index, 1);
+            saveVolunteerLogs(logs);
+            renderVolunteerTable();
+        }
+    });
+    renderVolunteerTable();
 });
 
 function showInputError(inputElement, message) {
