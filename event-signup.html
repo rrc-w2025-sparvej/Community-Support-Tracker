@@ -29,26 +29,29 @@
     <!-- MAIN CONTENT AREA -->
     <main class="main-container">
 
+        <!-- EVENT SIGNUP FORM -->
         <section class="card">
             <h2>Event Signup</h2>
             <p>Register PiXELL River Financial for upcoming community events.</p>
 
-            <!-- EVENT SIGNUP FORM -->
             <form id="eventSignupForm" class="form-container">
 
                 <div class="form-group">
                     <label for="eventName">Event Name</label>
                     <input type="text" id="eventName" name="eventName" placeholder="Enter event name" />
+                    <div id="eventNameError" class="error-message"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="repName">Company Representative's Name</label>
                     <input type="text" id="repName" name="repName" placeholder="Enter representative name" />
+                    <div id="repNameError" class="error-message"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="repEmail">Representative's Email</label>
                     <input type="email" id="repEmail" name="repEmail" placeholder="Enter representative email" />
+                    <div id="repEmailError" class="error-message"></div>
                 </div>
 
                 <div class="form-group">
@@ -59,14 +62,37 @@
                         <option value="Participant">Participant</option>
                         <option value="Organizer">Organizer</option>
                     </select>
+                    <div id="eventRoleError" class="error-message"></div>
                 </div>
 
-                <!-- Error Message -->
+                <!-- Error Message Placeholder -->
                 <div id="formErrors" class="error-message"></div>
 
-                <!-- Submit Button -->
                 <button type="submit" class="button">Submit Signup</button>
             </form>
+        </section>
+
+        <!-- STAGE TWO: EVENT SIGNUP TABLE -->
+        <section class="card">
+            <h2>All Event Signups</h2>
+            <table id="signupTable">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Representative</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="signupTableBody"></tbody>
+            </table>
+        </section>
+
+        <!-- STAGE TWO: SUMMARY SECTION -->
+        <section class="card">
+            <h2>Upcoming Events Summary</h2>
+            <div id="summaryContainer"></div>
         </section>
 
     </main>
@@ -79,5 +105,3 @@
     <script src="eventSignup.js"></script>
 </body>
 </html>
-
-
