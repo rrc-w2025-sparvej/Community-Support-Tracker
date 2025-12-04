@@ -13,6 +13,69 @@ function validateDate(value) {
 function validateRating(value) {
     return value !== "" && value >= 1 && value <= 5;
 }
+const STORAGE_KEY = "volunteerLogs";
+
+function getVolunteerLogs() {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+}
+
+function saveVolunteerLogs(logs) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+}
+
+function calculateTotalHours(logs) {
+    return logs.reduce((sum, log) => sum + Number(log.hoursVolunteered || 0), 0);
+}
+
+function updateSummary(logs) {
+    const total = calculateTotalHours(logs);
+    const totalEl = document.getElementById("totalHours");
+    if (totalEl) {
+        totalEl.textContent = total;
+    }
+}
+
+function renderVolunteerTable() {
+    const logs = getVolunteerLogs();
+    const tbody = document.getElementById("volunteerTableBody");
+    if (!tbody) return;
+
+    tbody.innerHTML = "";
+
+    logs.forEach((log, index) => {
+        const row = document.createElement("tr");
+
+        const charityCell = document.createElement("td");
+        charityCell.textContent = log.charityName;
+
+        const hoursCell = document.createElement("td");
+        hoursCell.textContent = log.hoursVolunteered;
+
+        const dateCell = document.createElement("td");
+        dateCell.textContent = log.volunteerDate;
+
+        const ratingCell = document.createElement("td");
+        ratingCell.textContent = log.experienceRating;
+
+        const actionsCell = document.createElement("td");
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete"; 
+        deleteButton.dataset.index = index;
+        actionsCell.appendChild(deleteButton);
+
+        row.appendChild(charityCell);
+        row.appendChild(hoursCell);
+        row.appendChild(dateCell);
+        row.appendChild(ratingCell);
+        row.appendChild(actionsCell);
+
+        tbody.appendChild(row);
+    });
+
+    updateSummary(logs);
+}
+
 
 function onSubmit(event) {
     event.preventDefault();
@@ -55,10 +118,11 @@ function onSubmit(event) {
             experienceRating: Number(ratingInput.value)
         };
 
-        console.log(volunteerData);
+        const logs = getVolunteerLogs();
+        logs.push(volunteerData);
+        saveVolunteerLogs(logs);
 
-        alert("Volunteer hours submitted successfully!");
-        console.log("Form submitted successfully");
+        renderVolunteerTable();
 
         const form = document.getElementById("volunteerForm");
         form.reset();
